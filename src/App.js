@@ -21,6 +21,11 @@ class App extends React.Component {
       temp_max: null,
       temp_min: null,
       description: "",
+      humidity: undefined,
+      pressure: undefined,
+      sunrise: undefined,
+      sunset: undefined,
+      wind: undefined,
       error: false
     };
 
@@ -82,13 +87,18 @@ class App extends React.Component {
       const response = await api_call.json();
 
       this.setState({
-        city: `${response.name}, ${response.sys.country}`,
+        city: response.name,
         country: response.sys.country,
         main: response.weather[0].main,
         celsius: this.calCelsius(response.main.temp),
         temp_max: this.calCelsius(response.main.temp_max),
         temp_min: this.calCelsius(response.main.temp_min),
         description: response.weather[0].description,
+        humidity: response.main.humidity,
+        pressure: response.main.pressure,
+        sunrise: response.sys.sunrise,
+        sunset: response.sys.sunset,
+        wind: response.wind.speed,
         error: false
       });
 
@@ -109,11 +119,19 @@ class App extends React.Component {
         <Form loadweather={this.getWeather} error={this.state.error} />
         <Weather
           cityname={this.state.city}
+          country={this.state.country}
           weatherIcon={this.state.icon}
           temp_celsius={this.state.celsius}
           temp_max={this.state.temp_max}
           temp_min={this.state.temp_min}
+          humidity={this.state.humidity}
+          pressure={this.state.pressure}
+          sunrise={this.state.sunrise}
+          sunset={this.state.sunset}
+          wind={this.state.wind}
           description={this.state.description}
+
+
         />
       </div>
     );

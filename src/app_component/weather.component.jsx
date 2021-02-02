@@ -18,6 +18,20 @@ const Weather = props => {
         {/* show max and min temp */}
         {maxminTemp(props.temp_min, props.temp_max)}
 
+
+        {/* humidity and pressure */}
+        {humpress(props.humidity, props.pressure)}
+
+        {/* rise and set */}
+        {sunRiseSet(props.sunrise, props.sunset)}
+
+        {/* wind speed */}
+        <h4 className="py-4">
+          <spna>
+            {props.wind}
+          </spna>
+        </h4>
+
         {/* Weather description */}
         <h4 className="py-3">
           {props.description.charAt(0).toUpperCase() +
@@ -36,6 +50,28 @@ function maxminTemp(min, max) {
       <h3>
         <span className="px-4">{min}&deg;</span>
         <span className="px-4">{max}&deg;</span>
+      </h3>
+    );
+  }
+}
+
+function sunRiseSet(rise, set) {
+  if (set && rise) {
+    return (
+      <h3>
+        <span className="px-4">{rise}</span>
+        <span className="px-4">{set}</span>
+      </h3>
+    );
+  }
+}
+
+function humpress(pressure, humidity) {
+  if (humidity && pressure) {
+    return (
+      <h3>
+        <span className="px-5">{pressure}hPa</span>
+        <span className="px-5">{humidity}%</span>
       </h3>
     );
   }
